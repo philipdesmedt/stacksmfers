@@ -1,0 +1,26 @@
+[project]
+name = "stacks-mfers"
+
+[contracts.stacks-mfers]
+depends_on = ["nft-trait", "commission-trait"]
+path = "contracts/stacks-mfers.clar"
+
+[contracts.stacks-mfers-stacks-art-commission]
+depends_on = ["commission-trait"]
+path = "contracts/stacks-mfers-stacks-art-commission.clar"
+
+[contracts.stacks-mfers-byzantion-commission]
+depends_on = ["commission-trait"]
+path = "contracts/stacks-mfers-byzantion-commission.clar"
+
+[contracts.stacks-mfers-stxnft-commission]
+depends_on = ["commission-trait"]
+path = "contracts/stacks-mfers-stxnft-commission.clar"
+
+[contracts.commission-trait]
+depends_on = []
+path = "contracts/commission-trait.clar"
+
+[contracts.nft-trait]
+depends_on = []
+path = "contracts/nft-trait.clar"

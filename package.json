@@ -1,0 +1,12 @@
+{
+  "name": "stacks-mfers",
+  "version": "0.1",
+  "author": {
+    "name": "mfer"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=16"
+  },
+  "workspaces": ["clarity", "web"]
+}
