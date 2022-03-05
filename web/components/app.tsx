@@ -4,15 +4,10 @@ import { Connect } from '@stacks/connect-react';
 import { AuthOptions } from '@stacks/connect';
 import { UserSession, AppConfig } from '@stacks/auth';
 import { defaultState, AppContext, AppState } from '@common/context';
-import { Header } from '@components/header';
-import { SubHeader } from '@components/sub-header';
-import { Routes } from '@components/routes';
-import { getRPCClient } from '@common/utils';
-import { stacksNetwork as network } from '@common/utils';
+import { Routes } from './routes';
+import { getRPCClient, stacksNetwork as network } from '@common/utils';
 import { callReadOnlyFunction, cvToJSON, stringAsciiCV } from '@stacks/transactions';
 import { resolveSTXAddress } from '@common/use-stx-address';
-import { TxStatus } from '@components/tx-status';
-import { TxSidebar } from '@components/tx-sidebar';
 import { useLocation } from 'react-router-dom';
 import ScrollToTop from '@components/scroll-to-top';
 import { Redirect } from 'react-router-dom';
@@ -21,7 +16,6 @@ import { Helmet } from "react-helmet";
 const icon = 'https://arkadiko.finance/favicon.ico';
 export const App: React.FC = () => {
   const [state, setState] = React.useState<AppState>(defaultState());
-  const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS || '';
   const location = useLocation();
 
   const appConfig = new AppConfig(['store_write', 'publish_data'], document.location.href);
@@ -84,9 +78,6 @@ export const App: React.FC = () => {
             defaultTitle="Stacks Mfers"
           />
           <div className="flex flex-col font-sans bg-white dark:bg-zinc-800 min-height-screen">
-            <Header signOut={signOut} />
-            <TxStatus />
-
             <Routes />
           </div>
         </AppContext.Provider>
