@@ -13,7 +13,7 @@ import ScrollToTop from '@components/scroll-to-top';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 
-const icon = 'https://domain-name.io/favicon.ico';
+const icon = 'https://www.stacksmfers.com/assets/favicon.ico';
 export const App: React.FC = () => {
   const [state, setState] = React.useState<AppState>(defaultState());
   const location = useLocation();
