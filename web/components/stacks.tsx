@@ -33,6 +33,7 @@ export const Stacks: React.FC = () => {
                 </p>
                 <a
                   href="https://www.stacks.co/"
+                  target="_blank"
                   className="inline-flex items-center justify-center px-5 py-3 mt-4 text-base font-medium text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                 >
                   Learn more

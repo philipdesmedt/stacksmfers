@@ -31,8 +31,7 @@ export const Team: React.FC = () => {
         <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
           <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl font-headings text-stone-900">Our team of mfers</h2>
           <p className="text-xl text-stone-500">
-            Ornare sagittis, suspendisse in hendrerit quis. Sed dui aliquet lectus sit pretium egestas vel mattis
-            neque.
+            We're all mfers who care about Bitcoin.
           </p>
         </div>
         <ul role="list" className="space-y-4 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:grid-cols-3 lg:gap-8">
