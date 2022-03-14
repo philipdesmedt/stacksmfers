@@ -22,13 +22,13 @@ export const Hero: React.FC = () => {
             <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
               <p className="flex items-center text-base font-medium text-stone-900">
                 <InformationCircleIcon className="w-5 h-5 mr-2 shrink-0" />
-                Stacks Mfers is not affiliated with the OG mfers of Sartoshi
+                Stacks Mfers is not affiliated with the OG mfer Sartoshi
               </p>
             </div>
           </div>
           <div className="relative mt-12 sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
             <div className="overflow-hidden mx-auto lg:absolute lg:top-0 lg:transform lg:-translate-x-56 lg:-translate-y-48 lg:left-1/2 w-[800px] h-[500px] lg:w-[1200px] lg:h-[800px] rounded-xl bg-gradient-to-tr from-zinc-700 to-stone-800 lg:-rotate-[15deg]">
-              <div style={{ backgroundSize: '85%', backgroundImage: `url('./assets/mfers.png')`}} className="lg:absolute lg:top-0 lg:left-0 w-full h-full bg-repeat border-4 rounded-xl border-stone-900 lg:rotate-25 filter brightness-100 blur-[1px] hover:brightness-100 hover:blur-0 transition duration-600" />
+              <div style={{ backgroundSize: '85%', backgroundImage: `url('./assets/mfers.png')`}} className="lg:absolute lg:top-0 lg:left-0 w-full h-full bg-repeat border-4 rounded-xl border-stone-900 lg:rotate-25 filter brightness-100 blur-0" />
             </div>
           </div>
         </div>
