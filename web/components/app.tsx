@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { ThemeProvider, theme } from '@blockstack/ui';
 import { Connect } from '@stacks/connect-react';
 import { AuthOptions } from '@stacks/connect';
 import { UserSession, AppConfig } from '@stacks/auth';
 import { defaultState, AppContext, AppState } from '@common/context';
+import { Header } from '@components/header';
 import { Routes } from './routes';
 import { getRPCClient, stacksNetwork as network } from '@common/utils';
 import { callReadOnlyFunction, cvToJSON, stringAsciiCV } from '@stacks/transactions';
@@ -13,7 +13,7 @@ import ScrollToTop from '@components/scroll-to-top';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 
-const icon = 'https://arkadiko.finance/favicon.ico';
+const icon = 'https://domain-name.io/favicon.ico';
 export const App: React.FC = () => {
   const [state, setState] = React.useState<AppState>(defaultState());
   const location = useLocation();
@@ -71,18 +71,17 @@ export const App: React.FC = () => {
 
   return (
     <Connect authOptions={authOptions}>
-      <ThemeProvider theme={theme}>
-        <AppContext.Provider value={[state, setState]}>
-          <Helmet
-            titleTemplate="Stacks Mfers - %s"
-            defaultTitle="Stacks Mfers"
-          />
-          <div className="flex flex-col font-sans bg-white dark:bg-zinc-800 min-height-screen">
-            <Routes />
-          </div>
-        </AppContext.Provider>
-      </ThemeProvider>
-      <ScrollToTop />
+      <AppContext.Provider value={[state, setState]}>
+        <Helmet
+          titleTemplate="Stacks Mfers - %s"
+          defaultTitle="Stacks Mfers"
+        />
+        <Header signOut={signOut} />
+        <div className="flex flex-col min-h-screen font-sans bg-white">
+          <Routes />
+        </div>
+      </AppContext.Provider>
+    <ScrollToTop />
     </Connect>
   );
 };
