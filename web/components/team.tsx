@@ -5,21 +5,21 @@ const people = [
   {
     name: '@sara_nmt',
     role: 'artist mfer',
-    imageUrl: './assets/team/sara_nmt.jpg',
+    imageUrl: './assets/team/sara_nmt.png',
     twitterUrl: 'https://twitter.com/sara_nmt',
   },
   {
     name: '@philipdesmedt',
     role: 'tech guru mfer',
-    imageUrl: './assets/team/philipdesmedt.jpg',
+    imageUrl: './assets/team/philipdesmedt.png',
     twitterUrl: 'https://twitter.com/philipdesmedt',
   },
   {
     name: '@novio_eth',
     role: 'NFT geek mfer',
-    imageUrl: './assets/team/novio_eth.jpg',
+    imageUrl: './assets/team/novio_eth.png',
     twitterUrl: 'https://twitter.com/novio_eth',
-  },
+  }
 ]
 
 export const Team: React.FC = () => {

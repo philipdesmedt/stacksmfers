@@ -61,6 +61,7 @@
 
 (define-public (claim-twenty-five)
   (begin
+    (asserts! (var-get sale-enabled) (err ERR-PUBLIC-SALE-DISABLED))
     (try! (mint (list true true true true true true true true true true true true true true true true true true true true true true true true true)))
     (mint-many (list true true true true true true true true true true) false)
   )
