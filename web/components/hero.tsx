@@ -14,9 +14,9 @@ export const Hero: React.FC = () => {
               </span>
             </h1>
             <p className="mt-3 text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-              <span className="font-bold">Whitelist Mint</span>: 21st of March <br/>
-              <span className="font-bold">Public Mint</span>: 22nd of March <br/>
-              <span className="font-bold">Reveal</span>: 24th of March <br/>
+              <span className="font-bold">Whitelist Mint</span>: 21st of March - 4:20pm CET <br/>
+              <span className="font-bold">Public Mint</span>: 22nd of March - 4:20pm CET<br/>
+              <span className="font-bold">Reveal</span>: 24th of March  - 4:20pm CET<br/>
               See you at the mint mfers!
             </p>
             <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
