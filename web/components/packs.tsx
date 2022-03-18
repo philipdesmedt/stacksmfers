@@ -32,7 +32,7 @@ const tiers = [
     href: '#',
     price: 172.5,
     features: [
-      '25 Mfer',
+      '25 Mfers',
       '10 Mfers FREE'
     ],
   },
@@ -40,7 +40,7 @@ const tiers = [
 
 export const Packs = () => {
   return (
-    <section className="relative my-16 pb-16 bg-white">
+    <section className="relative pb-16 my-16 bg-white">
       <div className="">
         <div className="px-4 pt-24 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="sm:flex sm:flex-col">
