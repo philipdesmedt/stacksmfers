@@ -65,6 +65,22 @@ Clarinet.test({
 });
 
 Clarinet.test({
+  name: "stacks-mfers: whitelist mint stacks-mfers",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+    let deployer = accounts.get("deployer")!
+    let wallet_1 = accounts.get("wallet_1")!
+
+    let block = chain.mineBlock([
+      Tx.contractCall("stacks-mfers", "enable-premint", [], deployer.address),
+      Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_1.address),
+      Tx.contractCall("stacks-mfers", "claim", [], wallet_1.address),
+    ]);
+    block.receipts[1].result.expectErr().expectUint(102);
+    block.receipts[2].result.expectOk().expectUint(2);
+  },
+});
+
+Clarinet.test({
   name: "stacks-mfers: transfer stacks-mfers",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     let deployer = accounts.get("deployer")!

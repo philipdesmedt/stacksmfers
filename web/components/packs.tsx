@@ -40,13 +40,13 @@ const tiers = [
 
 export const Packs = () => {
   return (
-    <section className="relative my-16 bg-white">
+    <section className="relative my-16 pb-16 bg-white">
       <div className="">
         <div className="px-4 pt-24 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="sm:flex sm:flex-col">
             <h1 className="text-5xl font-extrabold text-gray-900 font-headings">Mfing Mint Packs</h1>
             <p className="mt-5 text-xl text-gray-500">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit dicta exercitationem aperiam fugiat.
+              Do you dare to mint mfer?
             </p>
           </div>
           <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">
@@ -62,7 +62,7 @@ export const Packs = () => {
                     href={tier.href}
                     className="block w-full px-4 py-2 mt-4 text-sm font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                   >
-                    Buy now!
+                    Minting Soon!
                   </a>
                 </div>
                 <div className="px-6 pt-6 pb-8">

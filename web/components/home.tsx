@@ -11,9 +11,9 @@ export const Home: React.FC = () => {
 
       <Packs />
 
-      <Stacks />
-
       <Team />
+
+      <Stacks />
     </>
   );
 };
