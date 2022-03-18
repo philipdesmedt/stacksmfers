@@ -23,6 +23,48 @@ Clarinet.test({
 });
 
 Clarinet.test({
+  name: "stacks-mfers: mint five stacks-mfers",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+    let deployer = accounts.get("deployer")!
+    let wallet_1 = accounts.get("wallet_1")!
+
+    let block = chain.mineBlock([
+      Tx.contractCall("stacks-mfers", "toggle-sale-state", [], deployer.address),
+      Tx.contractCall("stacks-mfers", "claim-five", [], wallet_1.address),
+    ]);
+    block.receipts[1].result.expectOk().expectUint(7); // next mint would be ID 7
+  },
+});
+
+Clarinet.test({
+  name: "stacks-mfers: mint ten stacks-mfers",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+    let deployer = accounts.get("deployer")!
+    let wallet_1 = accounts.get("wallet_1")!
+
+    let block = chain.mineBlock([
+      Tx.contractCall("stacks-mfers", "toggle-sale-state", [], deployer.address),
+      Tx.contractCall("stacks-mfers", "claim-ten", [], wallet_1.address),
+    ]);
+    block.receipts[1].result.expectOk().expectUint(14); // next mint would be ID 14
+  },
+});
+
+Clarinet.test({
+  name: "stacks-mfers: mint twenty five stacks-mfers",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+    let deployer = accounts.get("deployer")!
+    let wallet_1 = accounts.get("wallet_1")!
+
+    let block = chain.mineBlock([
+      Tx.contractCall("stacks-mfers", "toggle-sale-state", [], deployer.address),
+      Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_1.address),
+    ]);
+    block.receipts[1].result.expectOk().expectUint(36); // next mint would be ID 36
+  },
+});
+
+Clarinet.test({
   name: "stacks-mfers: transfer stacks-mfers",
   async fn(chain: Chain, accounts: Map<string, Account>) {
     let deployer = accounts.get("deployer")!
@@ -174,17 +216,17 @@ Clarinet.test({
       Tx.contractCall("stacks-mfers", "toggle-sale-state", [], deployer.address),
     ]);
 
-    for (let i = 0; i < 474; i += 1) {
+    for (let i = 0; i < 13; i += 1) {
       block = chain.mineBlock([
-        Tx.contractCall("stacks-mfers", "claim", [], wallet_1.address),
-        Tx.contractCall("stacks-mfers", "claim", [], wallet_2.address),
-        Tx.contractCall("stacks-mfers", "claim", [], wallet_3.address),
-        Tx.contractCall("stacks-mfers", "claim", [], wallet_4.address),
-        Tx.contractCall("stacks-mfers", "claim", [], wallet_5.address),
-        Tx.contractCall("stacks-mfers", "claim", [], wallet_6.address),
-        Tx.contractCall("stacks-mfers", "claim", [], wallet_7.address),
-        Tx.contractCall("stacks-mfers", "claim", [], wallet_8.address),
-        Tx.contractCall("stacks-mfers", "claim", [], wallet_9.address),
+        Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_1.address),
+        Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_2.address),
+        Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_3.address),
+        Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_4.address),
+        Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_5.address),
+        Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_6.address),
+        Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_7.address),
+        Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_8.address),
+        Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_9.address),
       ]);
       block.receipts[0].result.expectOk();
       block.receipts[1].result.expectOk();
@@ -197,13 +239,24 @@ Clarinet.test({
       block.receipts[8].result.expectOk();
     }
 
+    let call = chain.callReadOnlyFn(
+      "stacks-mfers",
+      "get-last-token-id",
+      [],
+      wallet_1.address
+    );
+    call.result.expectOk().expectUint(4095);
+
     block = chain.mineBlock([
-      Tx.contractCall("stacks-mfers", "claim", [], wallet_1.address),
-      Tx.contractCall("stacks-mfers", "claim", [], wallet_2.address),
-      Tx.contractCall("stacks-mfers", "claim", [], wallet_3.address),
+      Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_1.address),
+      Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_1.address),
+      Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_1.address),
+      Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_2.address),
+      Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_3.address),
+      Tx.contractCall("stacks-mfers", "claim-ten", [], wallet_3.address),
     ]);
 
-    let call = chain.callReadOnlyFn(
+    call = chain.callReadOnlyFn(
       "stacks-mfers",
       "get-last-token-id",
       [],

@@ -7,9 +7,8 @@
 
 ;; Constants
 (define-constant DEPLOYER tx-sender)
-(define-constant COMM u400)
-(define-constant COMM-ADDR-ONE 'SPNWZ5V2TPWGQGVDR6T7B6RQ4XMGZ4PXTEE0VQ0S)
-(define-constant COMM-ADDR-TWO 'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C)
+(define-constant COMM u140)
+(define-constant COMM-ADDR-ONE 'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG)
 
 (define-constant ERR-NO-MORE-NFTS u100)
 (define-constant ERR-NOT-ENOUGH-PASSES u101)
@@ -31,7 +30,7 @@
 (define-data-var last-id uint u1)
 (define-data-var total-price uint u6900000)
 (define-data-var artist-address principal 'SP2N3BAG4GBF8NHRPH6AY4YYH1SP6NK5TGCY7RDFA)
-(define-data-var ipfs-root (string-ascii 80) "ipfs://TODO/")
+(define-data-var ipfs-root (string-ascii 80) "ipfs://QmaejQXudVNHxyubms1jiSs6gRNUukPbM4Yj4WWLGwesKN/{id}.json")
 (define-data-var mint-paused bool false)
 (define-data-var premint-enabled bool false)
 (define-data-var sale-enabled bool false)
@@ -43,13 +42,29 @@
 (define-map mint-passes principal uint)
 
 (define-public (claim)
-  (mint (list true)))
+  (mint (list true))
+)
 
-(define-public (claim-three) (mint (list true true true)))
+(define-public (claim-five)
+  (begin
+    (try! (mint (list true true true true true)))
+    (mint-many (list true) false)
+  )
+)
 
-(define-public (claim-five) (mint (list true true true true true)))
+(define-public (claim-ten)
+  (begin
+    (try! (mint (list true true true true true true true true true true)))
+    (mint-many (list true true true) false)
+  )
+)
 
-(define-public (claim-ten) (mint (list true true true true true true true true true true)))
+(define-public (claim-twenty-five)
+  (begin
+    (try! (mint (list true true true true true true true true true true true true true true true true true true true true true true true true true)))
+    (mint-many (list true true true true true true true true true true) false)
+  )
+)
 
 ;; Mintpass Minting
 (define-private (mint (orders (list 25 bool)))
@@ -60,24 +75,24 @@
       (begin
         (asserts! (>= passes (len orders)) (err ERR-NOT-ENOUGH-PASSES))
         (map-set mint-passes tx-sender (- passes (len orders)))
-        (mint-many orders)
+        (mint-many orders true)
       )
       (begin
         (asserts! (var-get sale-enabled) (err ERR-PUBLIC-SALE-DISABLED))
-        (mint-many orders)
+        (mint-many orders true)
       )
     )
   )
 )
 
-(define-private (mint-many (orders (list 25 bool )))  
+(define-private (mint-many (orders (list 25 bool )) (paid bool))
   (let (
     (last-nft-id (var-get last-id))
     (enabled (asserts! (<= last-nft-id (var-get mint-limit)) (err ERR-NO-MORE-NFTS)))
     (art-addr (var-get artist-address))
     (id-reached (fold mint-many-iter orders last-nft-id))
     (price (* (var-get total-price) (- id-reached last-nft-id)))
-    (total-commission (/ (* price COMM u2) u10000))
+    (total-commission (/ (* price COMM) u10000))
     (current-balance (get-balance tx-sender))
     (total-artist (- price total-commission))
     (capped (> (var-get mint-cap) u0))
@@ -94,10 +109,14 @@
       (begin
         (var-set last-id id-reached)
         (map-set token-count tx-sender (+ current-balance (- id-reached last-nft-id)))
-        (try! (stx-transfer? total-artist tx-sender (var-get artist-address)))
-        (try! (stx-transfer? (/ total-commission u2) tx-sender COMM-ADDR-ONE))
-        (try! (stx-transfer? (/ total-commission u2) tx-sender COMM-ADDR-TWO))
-      )    
+        (if paid
+          (begin
+            (try! (stx-transfer? total-artist tx-sender (var-get artist-address)))
+            (try! (stx-transfer? total-commission tx-sender COMM-ADDR-ONE))
+          )
+          true
+        )
+      )
     )
     (ok id-reached)
   )
