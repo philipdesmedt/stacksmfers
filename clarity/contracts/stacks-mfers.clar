@@ -30,7 +30,7 @@
 (define-data-var last-id uint u1)
 (define-data-var total-price uint u6900000)
 (define-data-var artist-address principal 'SP2N3BAG4GBF8NHRPH6AY4YYH1SP6NK5TGCY7RDFA)
-(define-data-var ipfs-root (string-ascii 80) "ipfs://QmaejQXudVNHxyubms1jiSs6gRNUukPbM4Yj4WWLGwesKN/{id}.json")
+(define-data-var ipfs-root (string-ascii 80) "ipfs://QmaejQXudVNHxyubms1jiSs6gRNUukPbM4Yj4WWLGwesKN/")
 (define-data-var mint-paused bool false)
 (define-data-var premint-enabled bool false)
 (define-data-var sale-enabled bool false)
@@ -298,12 +298,21 @@
   (default-to u0 (map-get? mint-passes caller))
 )
 
-(define-public (add-passes (caller principal) (amount uint))
+(define-public (add-passes (recipient { caller: principal, amount: uint }))
   (let (
-    (passes (get-passes caller))
+    (passes (get-passes (get caller recipient)))
   )
     (asserts! (or (is-eq tx-sender (var-get artist-address)) (is-eq tx-sender DEPLOYER)) (err ERR-NOT-AUTHORIZED))
-    (map-set mint-passes caller (+ passes amount))
+    (map-set mint-passes (get caller recipient) (+ passes (get amount recipient)))
+    (ok true)
+  )
+)
+
+(define-public (bulk-add-passes (recipients (list 200 { caller: principal, amount: uint })))
+  (begin
+    (asserts! (or (is-eq tx-sender (var-get artist-address)) (is-eq tx-sender DEPLOYER)) (err ERR-NOT-AUTHORIZED))
+
+    (map add-passes recipients)
     (ok true)
   )
 )
@@ -318,6 +327,4 @@
 
 
 (map-set mint-passes 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5 u5) ;; TODO - remove for mainnet
-(map-set mint-passes 'SP3R5TCK97NMBS1V1MARCK0YTDFWG1FKJ94EFQTF4 u5)
-(map-set mint-passes 'SP23RS2V3BAWHNQ3RHVZHK10F51RA99C1FHQKY9QH u4)
-(map-set mint-passes 'SPVTS7AM6JD5ADC9C292FMBDTZVA86TKPN774QD u5)
+(map-set mint-passes 'SP3VCX5NFQ8VCHFS9M6N40ZJNVTRT4HZ62WFH5C4Q u100)
