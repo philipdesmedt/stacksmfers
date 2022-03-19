@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { InformationCircleIcon } from '@heroicons/react/outline';
 import { AppContext } from '@common/context';
+import { useConnect } from '@stacks/connect-react';
 
 export const Hero: React.FC = () => {
   const [state, _] = useContext(AppContext);
+  const { doOpenAuth } = useConnect();
 
   const [amountLeft, setAmountLeft] = useState(4269); // TODO
   const [premintEnabled, setPremintEnabled] = useState(false);
@@ -53,8 +55,13 @@ export const Hero: React.FC = () => {
                     You have {ticketsLeft} whitelist spots left.
                   </p>
                 ) : (
-                  <p className="mt-4 text-center text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                    Connect your wallet to mint
+                  <p className="mt-4 text-center">
+                    <button
+                      type="button"
+                      className="inline-flex items-center text-lg px-4 py-2 text-sm font-medium text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                      onClick={() => doOpenAuth()}>
+                      <span>Connect Wallet</span>
+                    </button>
                   </p>
                 )}
                 <p className="mt-4 text-center text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
