@@ -75,6 +75,7 @@
     (if (var-get premint-enabled)
       (begin
         (asserts! (>= passes (len orders)) (err ERR-NOT-ENOUGH-PASSES))
+        (asserts! (<= (var-get last-id) u3579) (err ERR-NO-MORE-NFTS))
         (map-set mint-passes tx-sender (- passes (len orders)))
         (mint-many orders true)
       )
@@ -295,6 +296,16 @@
 
 (define-read-only (get-passes (caller principal))
   (default-to u0 (map-get? mint-passes caller))
+)
+
+(define-public (add-passes (caller principal) (amount uint))
+  (let (
+    (passes (get-passes caller))
+  )
+    (asserts! (or (is-eq tx-sender (var-get artist-address)) (is-eq tx-sender DEPLOYER)) (err ERR-NOT-AUTHORIZED))
+    (map-set mint-passes caller (+ passes amount))
+    (ok true)
+  )
 )
 
 (define-read-only (get-premint-enabled)
