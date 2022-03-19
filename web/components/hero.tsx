@@ -10,7 +10,7 @@ export const Hero: React.FC = () => {
   const [amountLeft, setAmountLeft] = useState(4269); // TODO
   const [premintEnabled, setPremintEnabled] = useState(false);
   const [ticketsLeft, setTicketsLeft] = useState(5); // TODO
-  const [isLoading, setIsLoading] = useState(false); // TODO
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (state.userData) {
@@ -18,6 +18,8 @@ export const Hero: React.FC = () => {
     } else {
       setTicketsLeft(0); // TODO
     }
+
+    setIsLoading(false);
   }, []);
 
   return (
@@ -33,7 +35,7 @@ export const Hero: React.FC = () => {
             </h1>
 
             {isLoading ? (
-              <p className="mt-3 text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+              <p className="mt-3 text-base text-center text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
                 Loading data mfer...
               </p>
             ) : (

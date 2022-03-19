@@ -25,7 +25,7 @@ const people = [
 export const Team: React.FC = () => {
   return (
     <section className="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <img className="mb-12" src="./assets/header_stacks_mfers.jpg" alt="" />
+      <img className="mb-12" src="./assets/header.png" alt="" />
 
       <div className="space-y-12" id="team">
         <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
