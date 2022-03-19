@@ -7,7 +7,10 @@ const tiers = [
     name: 'Single',
     href: '#',
     price: 6.9,
-    features: ['1 Mfer'],
+    features: [
+      '1 Mfer',
+      '0 Mfer FREE'
+    ],
   },
   {
     name: 'Degen',
@@ -41,7 +44,7 @@ const tiers = [
 export const Packs = () => {
   return (
     <section className="relative my-16 pb-16 bg-white">
-      <div className="">
+      <div id="mint">
         <div className="px-4 pt-24 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="sm:flex sm:flex-col">
             <h1 className="text-5xl font-extrabold text-gray-900 font-headings">Mfing Mint Packs</h1>
@@ -58,12 +61,6 @@ export const Packs = () => {
                     <span className="text-4xl font-extrabold text-gray-900 font-headings">{tier.price}</span>{' '}
                     <span className="text-base font-medium text-gray-500">STX</span>
                   </p>
-                  <a
-                    href={tier.href}
-                    className="block w-full px-4 py-2 mt-4 text-sm font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-                  >
-                    Minting Soon!
-                  </a>
                 </div>
                 <div className="px-6 pt-6 pb-8">
                   <h3 className="text-xs font-medium tracking-wide text-gray-500 uppercase">What's included</h3>
@@ -79,6 +76,13 @@ export const Packs = () => {
                       </li>
                     ))}
                   </ul>
+
+                  <a
+                    href={tier.href}
+                    className="block w-full px-4 py-2 mt-4 text-sm font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                  >
+                    Minting Soon!
+                  </a>
                 </div>
               </div>
             ))}

@@ -6,7 +6,7 @@ import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import { NavLink as RouterLink } from 'react-router-dom';
 
 const navigation = [
-  { name: 'Mint', href: '#' },
+  { name: 'Mint', href: '#mint' },
   { name: 'What is Stacks?', href: '#what-is-stacks' },
   { name: 'Team', href: '#team' },
 ]

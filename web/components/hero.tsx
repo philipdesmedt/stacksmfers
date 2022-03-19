@@ -13,7 +13,7 @@ export const Hero: React.FC = () => {
             <h1>
               <span className="block mt-1 text-4xl font-extrabold tracking-tight sm:text-5xl xl:text-6xl">
                 <span className="block mb-4 text-stone-900 font-headings">Mfers go multichain!</span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500">Own one of 4269 unique Stacks Mfers.</span>
+                <span className="block text-transparent text-center bg-clip-text bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500">Mfers left</span>
               </span>
             </h1>
 
@@ -22,13 +22,15 @@ export const Hero: React.FC = () => {
                 Loading data mfer...
               </p>
             ) : (
-              <p className="mt-3 text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                <p className="mt-3 text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                  <span className="font-bold">Whitelist Mint</span>: 21st of March - 4:20pm CET <br/>
-                  <span className="font-bold">Public Mint</span>: 22nd of March - 4:20pm CET<br/>
-                  <span className="font-bold">Reveal</span>: 24th of March  - 4:20pm CET<br/>
-                  See you at the mint mfers!
-                </p>
+              <p className="mt-3 text-3xl text-center block text-transparent text-center bg-clip-text bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500">
+                {amountLeft} / 4269
+
+                <a
+                  href="#mint"
+                  className="block w-1/2 px-4 py-2 mt-4 text-2xl font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                >
+                  Mint
+                </a>
               </p>
             )}
 
