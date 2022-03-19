@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { InformationCircleIcon } from '@heroicons/react/outline';
 
 export const Hero: React.FC = () => {
+  const [amountLeft, setAmountLeft] = useState(4269);
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <main className="relative overflow-hidden bg-white">
       <div className="px-4 mx-auto mt-16 max-w-7xl sm:mt-24 sm:px-6 lg:mt-32">
@@ -13,12 +16,22 @@ export const Hero: React.FC = () => {
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500">Own one of 4269 unique Stacks Mfers.</span>
               </span>
             </h1>
-            <p className="mt-3 text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-              <span className="font-bold">Whitelist Mint</span>: 21st of March - 4:20pm CET <br/>
-              <span className="font-bold">Public Mint</span>: 22nd of March - 4:20pm CET<br/>
-              <span className="font-bold">Reveal</span>: 24th of March  - 4:20pm CET<br/>
-              See you at the mint mfers!
-            </p>
+
+            {isLoading ? (
+              <p className="mt-3 text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                Loading data mfer...
+              </p>
+            ) : (
+              <p className="mt-3 text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                <p className="mt-3 text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                  <span className="font-bold">Whitelist Mint</span>: 21st of March - 4:20pm CET <br/>
+                  <span className="font-bold">Public Mint</span>: 22nd of March - 4:20pm CET<br/>
+                  <span className="font-bold">Reveal</span>: 24th of March  - 4:20pm CET<br/>
+                  See you at the mint mfers!
+                </p>
+              </p>
+            )}
+
             <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
               <p className="flex items-center text-base font-medium text-stone-900">
                 <InformationCircleIcon className="w-5 h-5 mr-2 shrink-0" />
