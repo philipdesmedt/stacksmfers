@@ -13,9 +13,17 @@ module.exports = {
         headings: ['Pangolin', ...defaultTheme.fontFamily.sans],
         sans: ['Poppins', ...defaultTheme.fontFamily.sans],
       },
+      opacity: {
+        '20': '.2',
+        '50': '.5'
+      },
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      opacity: ['active'],
+    }
+  },
   plugins: [
     require('@tailwindcss/aspect-ratio'),
   ],
