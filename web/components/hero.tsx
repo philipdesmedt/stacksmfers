@@ -17,8 +17,8 @@ export const Hero: React.FC = () => {
   const stxAddress = useSTXAddress();
 
   const [itemsLeft, setItemsLeft] = useState(4269);
-  const [premintEnabled, setPremintEnabled] = useState(false);
-  const [ticketsLeft, setTicketsLeft] = useState(5); // TODO
+  const [premintEnabled, setPremintEnabled] = useState(true);
+  const [ticketsLeft, setTicketsLeft] = useState(5);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export const Hero: React.FC = () => {
                   {premintEnabled && ticketsLeft > 0 ? (
                     <a
                       href="#mint"
-                      className="block w-1/2 px-4 py-2 mt-4 text-2xl font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                      className="block m-auto w-1/2 px-4 py-2 mt-4 text-2xl font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                     >
                       Mint
                     </a>
