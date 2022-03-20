@@ -93,7 +93,7 @@ export const Packs = () => {
       functionName: 'claim',
       functionArgs: [],
       postConditions,
-      onFinish: data => { console.log(data); },
+      onFinish: data => { window.location.href = `/thanks?txid=${data['txId']}` },
     });
   };
 
@@ -120,7 +120,7 @@ export const Packs = () => {
       functionName: 'claim-five',
       functionArgs: [],
       postConditions,
-      onFinish: data => { console.log(data); },
+      onFinish: data => { window.location.href = `/thanks?txid=${data['txId']}` },
     });
   };
 
@@ -147,7 +147,7 @@ export const Packs = () => {
       functionName: 'claim-ten',
       functionArgs: [],
       postConditions,
-      onFinish: data => { console.log(data); },
+      onFinish: data => { window.location.href = `/thanks?txid=${data['txId']}` },
     });
   };
 
