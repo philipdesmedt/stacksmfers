@@ -22,7 +22,6 @@
 (define-constant ERR-PAUSED u109)
 (define-constant ERR-MINT-LIMIT u110)
 (define-constant ERR-METADATA-FROZEN u111)
-(define-constant ERR-AIRDROP-CALLED u112)
 (define-constant ERR-NO-MORE-MINTS u113)
 
 ;; Internal variables
@@ -35,7 +34,6 @@
 (define-data-var premint-enabled bool false)
 (define-data-var sale-enabled bool false)
 (define-data-var metadata-frozen bool false)
-(define-data-var airdrop-called bool false)
 (define-data-var mint-cap uint u0)
 
 (define-map mints-per-user principal uint)
