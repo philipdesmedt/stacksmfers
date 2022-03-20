@@ -325,5 +325,5 @@
 )
 
 
-(map-set mint-passes 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5 u100) ;; TODO - remove for mainnet
+(map-set mint-passes 'ST5FG2V1D2965WPD9552SHR9YK27HRWB1S5YNACT u100) ;; TODO - remove for mainnet
 (map-set mint-passes 'SP3VCX5NFQ8VCHFS9M6N40ZJNVTRT4HZ62WFH5C4Q u100)
