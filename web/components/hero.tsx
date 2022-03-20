@@ -2,25 +2,63 @@ import React, { useContext, useEffect, useState } from 'react';
 import { InformationCircleIcon } from '@heroicons/react/outline';
 import { AppContext } from '@common/context';
 import { useConnect } from '@stacks/connect-react';
+import { stacksNetwork as network } from '@common/utils';
+import {
+  callReadOnlyFunction,
+  cvToJSON,
+  standardPrincipalCV,
+} from '@stacks/transactions';
+import { useSTXAddress } from '@common/use-stx-address';
 
 export const Hero: React.FC = () => {
+  const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS || '';
   const [state, _] = useContext(AppContext);
   const { doOpenAuth } = useConnect();
+  const stxAddress = useSTXAddress();
 
-  const [amountLeft, setAmountLeft] = useState(4269); // TODO
+  const [itemsLeft, setItemsLeft] = useState(4269);
   const [premintEnabled, setPremintEnabled] = useState(false);
   const [ticketsLeft, setTicketsLeft] = useState(5); // TODO
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (state.userData) {
-      setTicketsLeft(0);
-    } else {
-      setTicketsLeft(0); // TODO
-    }
+    const fetchNumberOfItems = async () => {
+      const itemsCall = await callReadOnlyFunction({
+        contractAddress,
+        contractName: 'stacks-mfers',
+        functionName: 'get-last-token-id',
+        functionArgs: [],
+        senderAddress: contractAddress,
+        network: network,
+      });
 
-    setIsLoading(false);
+      const count = cvToJSON(itemsCall).value.value;
+      setItemsLeft(4269 - count);
+    };
+
+    fetchNumberOfItems();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (state.userData) {
+        const ticketsCall = await callReadOnlyFunction({
+          contractAddress,
+          contractName: 'stacks-mfers',
+          functionName: 'get-passes',
+          functionArgs: [standardPrincipalCV(stxAddress)],
+          senderAddress: contractAddress,
+          network: network,
+        });
+        setTicketsLeft(cvToJSON(ticketsCall).value);
+      } else {
+        setTicketsLeft(0);
+      }
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [state.userData]);
 
   return (
     <main className="relative overflow-hidden bg-white">
@@ -41,7 +79,7 @@ export const Hero: React.FC = () => {
             ) : (
               <>
                 <p className="mt-3 text-3xl text-center block text-transparent text-center bg-clip-text bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500">
-                  {amountLeft} / 4269
+                  {itemsLeft} / 4269
 
                   {premintEnabled && ticketsLeft > 0 ? (
                     <a

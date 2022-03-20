@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CheckIcon, GiftIcon } from '@heroicons/react/solid';
-
+import { stacksNetwork as network } from '@common/utils';
+import { useSTXAddress } from '@common/use-stx-address';
+import {
+  createAssetInfo,
+  makeSTXTokenTransfer,
+  cvToJSON,
+  makeStandardSTXPostCondition,
+  standardPrincipalCV,
+  uintCV,
+  FungibleConditionCode,
+  NonFungibleConditionCode,
+  makeContractNonFungiblePostCondition,
+  makeContractSTXPostCondition,
+} from '@stacks/transactions';
+import { useConnect } from '@stacks/connect-react';
+import BN from 'bn.js';
 
 const tiers = [
   {
@@ -10,8 +25,9 @@ const tiers = [
     price: 6.9,
     features: [
       '1 Mfer',
-      '0 Mfer FREE'
+      '0 Mfers FREE'
     ],
+    fn: 'claim',
   },
   {
     id: 2,
@@ -22,6 +38,7 @@ const tiers = [
       '5 Mfers',
       '1 Mfer FREE'
     ],
+    fn: 'claim-five',
   },
   {
     id: 3,
@@ -32,6 +49,7 @@ const tiers = [
       '10 Mfers',
       '3 Mfers FREE'
     ],
+    fn: 'claim-ten',
   },
   {
     id: 4,
@@ -42,10 +60,135 @@ const tiers = [
       '25 Mfer',
       '10 Mfers FREE'
     ],
+    fn: 'claim-twenty-five',
   },
 ]
 
 export const Packs = () => {
+  const basicPrice = 6900000;
+  const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS || '';
+  const stxAddress = useSTXAddress();
+  const { doContractCall } = useConnect();
+
+  const claim = async () => {
+    const postConditions = [
+      makeStandardSTXPostCondition(
+        stxAddress || '',
+        FungibleConditionCode.LessEqual,
+        uintCV(basicPrice).value
+      ),
+      makeContractNonFungiblePostCondition(
+        contractAddress,
+        'stacks-mfers',
+        NonFungibleConditionCode.DoesNotOwn,
+        createAssetInfo(
+          contractAddress,
+          'stacks-mfers',
+          'stacks-mfers'
+        ),
+        uintCV(0)
+      ),
+    ];
+
+    await doContractCall({
+      network,
+      contractAddress,
+      stxAddress,
+      contractName: 'stacks-mfers',
+      functionName: 'claim',
+      functionArgs: [],
+      postConditions,
+      onFinish: data => { console.log(data); },
+    });
+  };
+
+  const claimFive = async () => {
+    const postConditions = [
+      makeStandardSTXPostCondition(
+        stxAddress || '',
+        FungibleConditionCode.LessEqual,
+        uintCV(5 * basicPrice).value
+      ),
+      makeContractNonFungiblePostCondition(
+        contractAddress,
+        'stacks-mfers',
+        NonFungibleConditionCode.DoesNotOwn,
+        createAssetInfo(
+          contractAddress,
+          'stacks-mfers',
+          'stacks-mfers'
+        ),
+        uintCV(0)
+      ),
+      makeContractNonFungiblePostCondition(
+        contractAddress,
+        'stacks-mfers',
+        NonFungibleConditionCode.DoesNotOwn,
+        createAssetInfo(
+          contractAddress,
+          'stacks-mfers',
+          'stacks-mfers'
+        ),
+        uintCV(0)
+      ),
+      makeContractNonFungiblePostCondition(
+        contractAddress,
+        'stacks-mfers',
+        NonFungibleConditionCode.DoesNotOwn,
+        createAssetInfo(
+          contractAddress,
+          'stacks-mfers',
+          'stacks-mfers'
+        ),
+        uintCV(0)
+      ),
+      makeContractNonFungiblePostCondition(
+        contractAddress,
+        'stacks-mfers',
+        NonFungibleConditionCode.DoesNotOwn,
+        createAssetInfo(
+          contractAddress,
+          'stacks-mfers',
+          'stacks-mfers'
+        ),
+        uintCV(0)
+      ),
+      makeContractNonFungiblePostCondition(
+        contractAddress,
+        'stacks-mfers',
+        NonFungibleConditionCode.DoesNotOwn,
+        createAssetInfo(
+          contractAddress,
+          'stacks-mfers',
+          'stacks-mfers'
+        ),
+        uintCV(0)
+      ),
+      makeContractNonFungiblePostCondition(
+        contractAddress,
+        'stacks-mfers',
+        NonFungibleConditionCode.DoesNotOwn,
+        createAssetInfo(
+          contractAddress,
+          'stacks-mfers',
+          'stacks-mfers'
+        ),
+        uintCV(0)
+      ),
+    ];
+
+    await doContractCall({
+      network,
+      contractAddress,
+      stxAddress,
+      contractName: 'stacks-mfers',
+      functionName: 'claim-five',
+      functionArgs: [],
+      postConditions,
+      onFinish: data => { console.log(data); },
+    });
+  };
+
   return (
     <section className="relative my-16 pb-16 bg-white">
       <div id="mint">
@@ -82,13 +225,13 @@ export const Packs = () => {
                     ))}
                   </ul>
 
-                  <a
-                    href={tier.href}
+                  <button
+                    onClick={() => { tier.id === 1 ? claim() : tier.id === 2 ? claimFive() : tier.id === 3 ? claimTen() : null }}
                     className="block w-full px-4 py-2 mt-4 text-sm font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                     disabled={tier.id === 4}
                   >
-                    {tier.id === 4 ? 'Public Mint Only' : 'Minting Soon'}
-                  </a>
+                    {tier.id === 4 ? 'Public Mint Only' : 'Mint'}
+                  </button>
                 </div>
               </div>
             ))}

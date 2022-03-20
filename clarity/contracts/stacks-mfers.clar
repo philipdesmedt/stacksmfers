@@ -7,7 +7,7 @@
 
 ;; Constants
 (define-constant DEPLOYER tx-sender)
-(define-constant COMM u140)
+(define-constant COMM u100000)
 (define-constant COMM-ADDR-ONE 'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG)
 
 (define-constant ERR-NO-MORE-NFTS u100)
@@ -94,9 +94,8 @@
     (art-addr (var-get artist-address))
     (id-reached (fold mint-many-iter orders last-nft-id))
     (price (* (var-get total-price) (- id-reached last-nft-id)))
-    (total-commission (/ (* price COMM) u10000))
     (current-balance (get-balance tx-sender))
-    (total-artist (- price total-commission))
+    (total-artist (- price COMM))
     (capped (> (var-get mint-cap) u0))
     (user-mints (get-mints tx-sender))
   )
@@ -114,7 +113,7 @@
         (if paid
           (begin
             (try! (stx-transfer? total-artist tx-sender (var-get artist-address)))
-            (try! (stx-transfer? total-commission tx-sender COMM-ADDR-ONE))
+            (try! (stx-transfer? COMM tx-sender COMM-ADDR-ONE))
           )
           true
         )
@@ -326,5 +325,5 @@
 )
 
 
-(map-set mint-passes 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5 u5) ;; TODO - remove for mainnet
+(map-set mint-passes 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5 u100) ;; TODO - remove for mainnet
 (map-set mint-passes 'SP3VCX5NFQ8VCHFS9M6N40ZJNVTRT4HZ62WFH5C4Q u100)
