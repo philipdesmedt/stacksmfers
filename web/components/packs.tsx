@@ -77,16 +77,11 @@ export const Packs = () => {
         FungibleConditionCode.LessEqual,
         uintCV(basicPrice).value
       ),
-      makeContractNonFungiblePostCondition(
+      makeContractSTXPostCondition(
         contractAddress,
         'stacks-mfers',
-        NonFungibleConditionCode.DoesNotOwn,
-        createAssetInfo(
-          contractAddress,
-          'stacks-mfers',
-          'stacks-mfers'
-        ),
-        uintCV(0)
+        FungibleConditionCode.LessEqual,
+        uintCV(basicPrice).value
       ),
     ];
 
@@ -109,71 +104,11 @@ export const Packs = () => {
         FungibleConditionCode.LessEqual,
         uintCV(5 * basicPrice).value
       ),
-      makeContractNonFungiblePostCondition(
+      makeContractSTXPostCondition(
         contractAddress,
         'stacks-mfers',
-        NonFungibleConditionCode.DoesNotOwn,
-        createAssetInfo(
-          contractAddress,
-          'stacks-mfers',
-          'stacks-mfers'
-        ),
-        uintCV(0)
-      ),
-      makeContractNonFungiblePostCondition(
-        contractAddress,
-        'stacks-mfers',
-        NonFungibleConditionCode.DoesNotOwn,
-        createAssetInfo(
-          contractAddress,
-          'stacks-mfers',
-          'stacks-mfers'
-        ),
-        uintCV(0)
-      ),
-      makeContractNonFungiblePostCondition(
-        contractAddress,
-        'stacks-mfers',
-        NonFungibleConditionCode.DoesNotOwn,
-        createAssetInfo(
-          contractAddress,
-          'stacks-mfers',
-          'stacks-mfers'
-        ),
-        uintCV(0)
-      ),
-      makeContractNonFungiblePostCondition(
-        contractAddress,
-        'stacks-mfers',
-        NonFungibleConditionCode.DoesNotOwn,
-        createAssetInfo(
-          contractAddress,
-          'stacks-mfers',
-          'stacks-mfers'
-        ),
-        uintCV(0)
-      ),
-      makeContractNonFungiblePostCondition(
-        contractAddress,
-        'stacks-mfers',
-        NonFungibleConditionCode.DoesNotOwn,
-        createAssetInfo(
-          contractAddress,
-          'stacks-mfers',
-          'stacks-mfers'
-        ),
-        uintCV(0)
-      ),
-      makeContractNonFungiblePostCondition(
-        contractAddress,
-        'stacks-mfers',
-        NonFungibleConditionCode.DoesNotOwn,
-        createAssetInfo(
-          contractAddress,
-          'stacks-mfers',
-          'stacks-mfers'
-        ),
-        uintCV(0)
+        FungibleConditionCode.LessEqual,
+        uintCV(5 * basicPrice).value
       ),
     ];
 
@@ -183,6 +118,33 @@ export const Packs = () => {
       stxAddress,
       contractName: 'stacks-mfers',
       functionName: 'claim-five',
+      functionArgs: [],
+      postConditions,
+      onFinish: data => { console.log(data); },
+    });
+  };
+
+  const claimTen = async () => {
+    const postConditions = [
+      makeStandardSTXPostCondition(
+        stxAddress || '',
+        FungibleConditionCode.LessEqual,
+        uintCV(10 * basicPrice).value
+      ),
+      makeContractSTXPostCondition(
+        contractAddress,
+        'stacks-mfers',
+        FungibleConditionCode.LessEqual,
+        uintCV(10 * basicPrice).value
+      ),
+    ];
+
+    await doContractCall({
+      network,
+      contractAddress,
+      stxAddress,
+      contractName: 'stacks-mfers',
+      functionName: 'claim-ten',
       functionArgs: [],
       postConditions,
       onFinish: data => { console.log(data); },
