@@ -6,7 +6,7 @@ import {
   getAddressFromPrivateKey,
   TransactionVersion,
   makeContractDeploy,
-  StacksTestnet,
+  StacksMainnet,
 } from '@blockstack/stacks-transactions';
 import BN from 'bn.js';
 require('dotenv').config();
@@ -19,20 +19,19 @@ interface Contract {
 }
 
 const contracts: Contract[] = [
-  { name: 'nft-trait' },
   { name: 'commission-trait' },
-  { name: 'stacks-mfers' },
+  { name: 'stacks-mfers-stacks-art-commission' },
 ];
 
-const rpcClient = new RPCClient('https://stacks-node-api.testnet.stacks.co' || process.env.API_SERVER || 'http://localhost:3999');
+const rpcClient = new RPCClient('https://stacks-node-api.mainnet.stacks.co' || process.env.API_SERVER || 'http://localhost:3999');
 const privateKey = process.env.CONTRACT_PRIVATE_KEY;
 if (!privateKey) {
   console.error('Provide a private key with `process.env.CONTRACT_PRIVATE_KEY`');
   process.exit(1);
 }
-const address = getAddressFromPrivateKey(privateKey, TransactionVersion.Testnet);
+const address = getAddressFromPrivateKey(privateKey, TransactionVersion.Mainnet);
 
-const network = new StacksTestnet();
+const network = new StacksMainnet();
 network.coreApiUrl = rpcClient.url;
 
 const run = async () => {

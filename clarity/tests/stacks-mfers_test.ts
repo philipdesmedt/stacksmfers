@@ -279,5 +279,10 @@ Clarinet.test({
       wallet_1.address
     );
     call.result.expectOk().expectUint(4269);
+
+    block = chain.mineBlock([
+      Tx.contractCall("stacks-mfers", "claim-twenty-five", [], wallet_1.address)
+    ]);
+    block.receipts[0].result.expectErr().expectUint(100);
   },
 });
