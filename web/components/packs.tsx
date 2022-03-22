@@ -151,6 +151,33 @@ export const Packs = () => {
     });
   };
 
+  const claimTwentyFive = async () => {
+    const postConditions = [
+      makeStandardSTXPostCondition(
+        stxAddress || '',
+        FungibleConditionCode.LessEqual,
+        uintCV(25 * basicPrice).value
+      ),
+      makeContractSTXPostCondition(
+        contractAddress,
+        'stacks-mfers',
+        FungibleConditionCode.LessEqual,
+        uintCV(25 * basicPrice).value
+      ),
+    ];
+
+    await doContractCall({
+      network,
+      contractAddress,
+      stxAddress,
+      contractName: 'stacks-mfers',
+      functionName: 'claim-twenty-five',
+      functionArgs: [],
+      postConditions,
+      onFinish: data => { window.location.href = `/thanks?txid=${data['txId']}` },
+    });
+  };
+
   return (
     <section className="relative my-16 pb-16 bg-white">
       <div id="mint">
@@ -188,11 +215,10 @@ export const Packs = () => {
                   </ul>
 
                   <button
-                    onClick={() => { tier.id === 1 ? claim() : tier.id === 2 ? claimFive() : tier.id === 3 ? claimTen() : null }}
+                    onClick={() => { tier.id === 1 ? claim() : tier.id === 2 ? claimFive() : tier.id === 3 ? claimTen() : claimTwentyFive() }}
                     className="block w-full px-4 py-2 mt-4 text-sm font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-                    disabled={tier.id === 4}
                   >
-                    {tier.id === 4 ? 'Public Mint Only' : 'Mint'}
+                    Mint
                   </button>
                 </div>
               </div>

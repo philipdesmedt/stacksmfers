@@ -17,8 +17,6 @@ export const Hero: React.FC = () => {
   const stxAddress = useSTXAddress();
 
   const [itemsLeft, setItemsLeft] = useState(4269);
-  const [premintEnabled, setPremintEnabled] = useState(true);
-  const [ticketsLeft, setTicketsLeft] = useState(5);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -34,31 +32,11 @@ export const Hero: React.FC = () => {
 
       const count = cvToJSON(itemsCall).value.value;
       setItemsLeft(4269 - count);
+      setIsLoading(false);
     };
 
     fetchNumberOfItems();
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (state.userData) {
-        const ticketsCall = await callReadOnlyFunction({
-          contractAddress,
-          contractName: 'stacks-mfers',
-          functionName: 'get-passes',
-          functionArgs: [standardPrincipalCV(stxAddress)],
-          senderAddress: contractAddress,
-          network: network,
-        });
-        setTicketsLeft(cvToJSON(ticketsCall).value);
-      } else {
-        setTicketsLeft(0);
-      }
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, [state.userData]);
 
   return (
     <main className="relative overflow-hidden bg-white">
@@ -80,20 +58,14 @@ export const Hero: React.FC = () => {
               <>
                 <p className="mt-3 text-3xl text-center block text-transparent text-center bg-clip-text bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500">
                   {itemsLeft} / 4269
-
-                  {premintEnabled && ticketsLeft > 0 ? (
-                    <a
-                      href="#mint"
-                      className="block m-auto w-1/2 px-4 py-2 mt-4 text-2xl font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-                    >
-                      Mint
-                    </a>
-                  ) : null}
                 </p>
                 {state.userData ? (
-                  <p className="mt-4 text-center text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                    You have {ticketsLeft} whitelist spots left.
-                  </p>
+                  <a
+                    href="#mint"
+                    className="block m-auto w-1/2 px-4 py-2 mt-4 text-2xl font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                  >
+                    Mint
+                  </a>
                 ) : (
                   <p className="mt-4 text-center">
                     <button
@@ -105,7 +77,6 @@ export const Hero: React.FC = () => {
                   </p>
                 )}
                 <p className="mt-4 text-center text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                  Whitelist Mint: 21st of March - 4:20pm CET <br/>
                   Public Mint: 22nd of March - 4:20pm CET <br/>
                   Reveal: 24th of March - 4:20pm CET <br/>
                 </p>
