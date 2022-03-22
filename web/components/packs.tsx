@@ -190,7 +190,7 @@ export const Packs = () => {
           </div>
           <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">
             {tiers.map((tier) => (
-              <div key={tier.name} className={`border-2 divide-y-2 rounded-lg shadow-sm rounded-xl border-stone-900 divide-stone-900 ${tier.id === 4 ? 'opacity-50' : ''}`}>
+              <div key={tier.name} className={`border-2 divide-y-2 rounded-lg shadow-sm rounded-xl border-stone-900 divide-stone-900 opacity-50`}>
                 <div className="p-6">
                   <h2 className="text-xl font-medium leading-6 text-gray-900 font-headings">{tier.name}</h2>
                   <h3 className="text-xl font-medium leading-6 text-gray-900 font-headings">{tier.id === 4 ? 'Limited!' : ''}</h3>
@@ -215,10 +215,11 @@ export const Packs = () => {
                   </ul>
 
                   <button
-                    onClick={() => { tier.id === 1 ? claim() : tier.id === 2 ? claimFive() : tier.id === 3 ? claimTen() : claimTwentyFive() }}
+                    onClick={() => { null }}
                     className="block w-full px-4 py-2 mt-4 text-sm font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                    disabled={true}
                   >
-                    Mint
+                    SOLD OUT
                   </button>
                 </div>
               </div>

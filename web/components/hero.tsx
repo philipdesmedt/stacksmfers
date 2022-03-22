@@ -46,7 +46,7 @@ export const Hero: React.FC = () => {
             <h1>
               <span className="block mt-1 text-4xl font-extrabold tracking-tight sm:text-5xl xl:text-6xl">
                 <span className="block mb-4 text-stone-900 font-headings">Mfers go multichain!</span>
-                <span className="block mt-8 text-transparent text-center bg-clip-text bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500">Mfers left</span>
+                <span className="block mt-8 text-transparent text-center bg-clip-text bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500">Secondary Market:</span>
               </span>
             </h1>
 
@@ -57,27 +57,13 @@ export const Hero: React.FC = () => {
             ) : (
               <>
                 <p className="mt-3 text-3xl text-center block text-transparent text-center bg-clip-text bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500">
-                  {itemsLeft} / 4269
+                  <ul>
+                    <li><a href="https://stxnft.com/collections/stacks-mfers">Buy on STXNFT</a></li>
+                    <li><a href="https://www.stacksart.com/collections/stacks-mfers/market">Buy on StacksArt</a></li>
+                    <li><a href="https://byzantion.xyz/collection/stacks-mfers">Buy on Byzantion</a></li>
+                  </ul>
                 </p>
-                {state.userData ? (
-                  <a
-                    href="#mint"
-                    className="block m-auto w-1/2 px-4 py-2 mt-4 text-2xl font-medium text-center text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-                  >
-                    Mint
-                  </a>
-                ) : (
-                  <p className="mt-4 text-center">
-                    <button
-                      type="button"
-                      className="inline-flex items-center text-lg px-4 py-2 text-sm font-medium text-white border border-transparent bg-gradient-to-r from-blue-600 via-pink-500 to-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-                      onClick={() => doOpenAuth()}>
-                      <span>Connect Wallet</span>
-                    </button>
-                  </p>
-                )}
                 <p className="mt-4 text-center text-base text-stone-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                  Public Mint: 22nd of March - 4:20pm CET <br/>
                   Reveal: 24th of March - 4:20pm CET <br/>
                 </p>
               </>
