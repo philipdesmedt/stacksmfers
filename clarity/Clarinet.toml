@@ -17,6 +17,10 @@ path = "contracts/mfer-token.clar"
 depends_on = ["ft-trait"]
 path = "contracts/usdm-token.clar"
 
+[contracts.usdm-minter]
+depends_on = ["usdm-token"]
+path = "contracts/usdm-minter.clar"
+
 ##########
 # Traits #
 ##########

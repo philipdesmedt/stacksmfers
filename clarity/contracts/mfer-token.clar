@@ -71,18 +71,10 @@
 ;; ---------------------------------------------------------
 
 ;; Mint method for DAO
-(define-public (mint-for-dao (amount uint) (recipient principal))
+(define-public (mint (amount uint) (recipient principal))
   (begin
-    (asserts! (is-eq contract-caller .arkadiko-dao) (err ERR-NOT-AUTHORIZED))
+    (asserts! (is-eq contract-caller .usdm-minter) (err ERR-NOT-AUTHORIZED))
     (ft-mint? mfer amount recipient)
-  )
-)
-
-;; Burn method for DAO
-(define-public (burn-for-dao (amount uint) (sender principal))
-  (begin
-    (asserts! (is-eq contract-caller .arkadiko-dao) (err ERR-NOT-AUTHORIZED))
-    (ft-burn? mfer amount sender)
   )
 )
 
