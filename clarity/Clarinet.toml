@@ -9,14 +9,6 @@ path = "contracts/stacks-mfers.clar"
 depends_on = ["commission-trait"]
 path = "contracts/stacks-mfers-stacks-art-commission.clar"
 
-[contracts.stacks-mfers-byzantion-commission]
-depends_on = ["commission-trait"]
-path = "contracts/stacks-mfers-byzantion-commission.clar"
-
-[contracts.stacks-mfers-stxnft-commission]
-depends_on = ["commission-trait"]
-path = "contracts/stacks-mfers-stxnft-commission.clar"
-
 [contracts.commission-trait]
 depends_on = []
 path = "contracts/commission-trait.clar"
