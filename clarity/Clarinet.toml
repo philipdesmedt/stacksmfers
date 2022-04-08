@@ -13,6 +13,10 @@ path = "contracts/stacks-mfers-stacks-art-commission.clar"
 depends_on = ["ft-trait"]
 path = "contracts/mfer-token.clar"
 
+[contracts.usdm-token]
+depends_on = ["ft-trait"]
+path = "contracts/usdm-token.clar"
+
 ##########
 # Traits #
 ##########
