@@ -9,6 +9,13 @@ path = "contracts/stacks-mfers.clar"
 depends_on = ["commission-trait"]
 path = "contracts/stacks-mfers-stacks-art-commission.clar"
 
+[contracts.mfer-token]
+depends_on = ["ft-trait"]
+path = "contracts/mfer-token.clar"
+
+##########
+# Traits #
+##########
 [contracts.commission-trait]
 depends_on = []
 path = "contracts/commission-trait.clar"
@@ -16,3 +23,7 @@ path = "contracts/commission-trait.clar"
 [contracts.nft-trait]
 depends_on = []
 path = "contracts/nft-trait.clar"
+
+[contracts.ft-trait]
+depends_on = []
+path = "contracts/ft-trait.clar"
