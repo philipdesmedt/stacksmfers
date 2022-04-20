@@ -28,7 +28,7 @@
     (points (get points (get-stake tx-sender (contract-of collection) item)))
     (balance (get points-balance (get-staker tx-sender)))
     (lifetime (get lifetime-points (get-staker tx-sender)))
-    (multiplier (unwrap-panic (contract-call? lookup-table lookup (- item u1))))
+    (multiplier (unwrap-panic (contract-call? lookup-table lookup item)))
     (total-multiplier (get total-multiplier (get-staker tx-sender)))
     (block block-height)
     (prev-time (get stake-time (get-staker tx-sender)))
